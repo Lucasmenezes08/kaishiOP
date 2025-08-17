@@ -22,7 +22,7 @@ export interface AnimeCard {
     id: number;
     name: string;
     images: AnimeImage[];
-    animeThemes: AnimeTheme[]
+    animethemes: AnimeTheme[]
 }
 
 export interface AnimeData {
@@ -30,5 +30,9 @@ export interface AnimeData {
     year: number;
     synopsis: string;
     images: AnimeImage;
-    animeThemes: AnimeTheme;
+    animethemes: AnimeTheme;
+}
+
+export interface ApiResponse {
+  anime: AnimeCard[];
 }
