@@ -3,11 +3,13 @@ import { useState } from "react";
 
 interface AnimeCardProps {
     anime : AnimeCard;
+    canPlayAudio: boolean
 }
 
 
-export default function AnimeCardComponent ({anime}:AnimeCardProps):any{
+export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps):any{
     const [isHovered, setIsHovered] = useState(false);
+    
 
     const coverImage = anime.images.find(img => img.facet === 'Cover Large')?.link;
 
@@ -18,17 +20,18 @@ export default function AnimeCardComponent ({anime}:AnimeCardProps):any{
 
     return (
         <section className="" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+           
             {isHovered && firstOpeningVideo ? (
                 <video
                     key={anime.id}
                     src={firstOpeningVideo}
                     autoPlay
-                    muted
+                    muted={!canPlayAudio}
                     loop
                     playsInline
                 >
-
                 </video>
+                
             ) : (
                 <img 
                     src={coverImage}

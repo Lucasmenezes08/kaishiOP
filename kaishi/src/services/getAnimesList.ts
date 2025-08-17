@@ -1,7 +1,7 @@
 import type { ApiResponse } from "../types/type-services/animeThemeTypes";
 
 
-const API_URL = 'https://api.animethemes.moe/anime?filter[season]=Summer&filter[year]=2025&page[size]=18&sort=-year&include=images,animethemes.animethemeentries.videos';
+const API_URL = 'https://api.animethemes.moe/anime?filter[season]=winter,summer,spring&filter[year]=2025,2024,2023&page[size]=40&sort=-year&include=images,animethemes.animethemeentries.videos';
 
 export default async function getAnimeList ():Promise<ApiResponse>{
     try {
