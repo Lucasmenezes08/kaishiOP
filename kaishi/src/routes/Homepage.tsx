@@ -1,4 +1,4 @@
-import { useAnimes } from "../hooks/UseAnimes"
+import { useAnimes } from "../hooks/useAnimes"
 import AnimeCardComponent from "../components/common/animeCard/AnimeCardComponent"
 import { useState } from "react";
 
