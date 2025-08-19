@@ -1,5 +1,5 @@
 import type { AnimeCard} from "../../../types/type-services/animeThemeTypes";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 interface AnimeCardProps {
     anime : AnimeCard;
@@ -19,26 +19,31 @@ export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps
 
 
     return (
-        <section className="" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-           
-            {isHovered && firstOpeningVideo ? (
-                <video
-                    key={anime.id}
-                    src={firstOpeningVideo}
-                    autoPlay
-                    muted={!canPlayAudio}
-                    loop
-                    playsInline
-                >
-                </video>
+        <section className="relative w-full h-full rounded-lg overflow-hidden shadow-lg cursor-pointer group" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+           <section className="">
+                {isHovered && firstOpeningVideo ? (
+                    <Suspense fallback={<p>Carregando</p>}>
+                        <video
+                            key={anime.id}
+                            className="absolute top-0 left-0 w-full h-full object-cover"
+                            src={firstOpeningVideo}
+                            autoPlay
+                            muted={!canPlayAudio}
+                            loop
+                            playsInline
+                        >
+                        </video>
+                    </Suspense>
                 
             ) : (
                 <img 
-                    src={coverImage}
+                    src={coverImage || '/placeholder.png'}
                     alt={`capa de ${anime.name}`}
                 >
                 </img>
             )}
+
+           </section>
             <section>{anime.name}</section>
         </section>
     )

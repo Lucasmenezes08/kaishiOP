@@ -1,8 +1,9 @@
 import { useQueries } from "@tanstack/react-query";
 import { useState } from "react";
 import getAnimeYear from "../../../../services/getAnimeYear";
-import { Carousel , CarouselContent , CarouselItem , CarouselNext , CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel , CarouselContent , CarouselItem , CarouselNext , CarouselPrevious} from "@/components/ui/carousel";
 import AnimeCardComponent from "../../animeCard/AnimeCardComponent";
+
 
 
 const years = [2025 , 2024 , 2023 , 2022 , 2021 , 2020 , 2019, 2018, 2017 , 2016 , 2015 , 2014 , 2013 , 2012 , 2011 , 2010];
@@ -15,7 +16,7 @@ export default function CarrouselYear (){
     const result = useQueries({
         queries: years.map(year => {
             return {
-                queryKey: ['animes' , 'year'],
+                queryKey: ['animes' , year],
                 queryFn :() => getAnimeYear(year),
                 staleTime: 1000 * 60 * 60,
             }
@@ -26,7 +27,7 @@ export default function CarrouselYear (){
 
 
     return (
-        <section onClick={() => setAudioPermission(true)}>
+        <section className="w-full h-[10rem]" onClick={() => setAudioPermission(true)}>
             <h1>Animes por ano</h1>
 
             {result.map ((anime , index) => {
@@ -43,18 +44,19 @@ export default function CarrouselYear (){
                 const animeData = anime.data?.anime;
 
                 return (
-                    <section key={yearToShow}>
+                    <section className="w-full flex items-center flex-col" key={yearToShow}>
                         <p>{`Aberturas de ${yearToShow}`}</p>
-                        <Carousel>
-                            <CarouselContent>
+                        <Carousel className="w-full" opts={{loop: true , align : "start"}}>
+                            <CarouselContent className="px-5 py-10">
                                 {animeData?.map(value => (
-                                    <CarouselItem key={value.id}>
-                                        <AnimeCardComponent anime={value} canPlayAudio={audioPermission}/>
+                                    <CarouselItem className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5" key={value.id}>
+                                        <section className="h-full">
+                                            <AnimeCardComponent anime={value} canPlayAudio={audioPermission} />
+                                        </section>
                                     </CarouselItem>
                                 ))}
                             </CarouselContent>
-                            <CarouselPrevious />
-                            <CarouselNext />
+                            
                         </Carousel>
                     </section>
                 )
