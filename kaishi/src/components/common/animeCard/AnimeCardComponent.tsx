@@ -12,10 +12,8 @@ export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps
     const [isHovered, setIsHovered] = useState(false);
     const [isVideoLoading , setIsVideoLoading] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
-
-
-
     
+
 
     const coverImage = anime.images.find(img => img.facet === 'Cover Large' || 'Cover Small')?.link;
 
@@ -23,66 +21,27 @@ export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps
     ?.find(theme => theme.slug === 'OP1')
     ?.animethemeentries[0]?.videos[0]?.link;
 
+
     useEffect(() => {
         const videoElement = videoRef.current;
+        if (!videoElement) return;
+
+        if (isHovered && firstOpeningVideo) {
         
-        if (!videoElement){
-            return;
-        }
-
-        function handleUpdate (){
-            if (videoElement != null){
-                if (videoElement?.currentTime >= 20){
-                    videoElement.currentTime = 0;
-                }
-            }
-           
-        }
-
-        function handleWaiting (){
-            setIsVideoLoading(true);
-        }
-
-        function handlePlaying (){
-            setIsVideoLoading(false)
-        }
-
-        if (isHovered && firstOpeningVideo){
-            videoElement.muted = !canPlayAudio;
-            setIsVideoLoading(true); 
-
-            videoElement.play().catch(err => {
-                console.error("Autoplay bloqueado", err);
-                setIsVideoLoading(false)
-            })
-
-
-            videoElement.addEventListener('timeupdate', handleUpdate);
-            videoElement.addEventListener('waiting', handleWaiting);
-            videoElement.addEventListener('playing', handlePlaying);
-        }
-
-        else {
+            videoElement.play().catch(err => console.error("Autoplay bloqueado", err));
+        } else {
             videoElement.pause();
             videoElement.currentTime = 0;
-            setIsVideoLoading(false); 
-            
-           
-            videoElement.removeEventListener('timeupdate', handleUpdate);
-            videoElement.removeEventListener('waiting', handleWaiting);
-            videoElement.removeEventListener('playing', handlePlaying);
         }
+    }, [isHovered, firstOpeningVideo]); 
 
-        return () => {
-            if (videoElement) {
-                
-                videoElement.removeEventListener('timeupdate', handleUpdate);
-                videoElement.removeEventListener('waiting', handleWaiting);
-                videoElement.removeEventListener('playing', handlePlaying);
-            }
-        };
-
-    } , [isHovered , firstOpeningVideo , canPlayAudio]);
+    
+    const handleTimeUpdate = () => {
+        const videoElement = videoRef.current;
+        if (videoElement && videoElement.currentTime >= 20) {
+            videoElement.currentTime = 0;
+        }
+    };
 
 
     return (
@@ -91,19 +50,22 @@ export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps
             <section className="relative w-full h-full aspect-[3/4] rounded-lg overflow-hidden shadow-lg cursor-pointer group" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             
                 {isHovered && firstOpeningVideo ? (
+               
                 <video
+                ref={videoRef}
                     key={anime.id}
                     className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300"
-                    style={{ opacity: isHovered && firstOpeningVideo ? 1 : 0 }}
+                    style={{ opacity: isHovered && firstOpeningVideo ? 0.75 : 0 }}
                     src={firstOpeningVideo}
-                    autoPlay
                     muted={!canPlayAudio}
-                    loop
                     playsInline
                     preload="metadata" 
+                    onWaiting={() => setIsVideoLoading(true)}
+                    onPlaying={() => setIsVideoLoading(false)}
+                    onTimeUpdate={handleTimeUpdate} 
                 >
                 </video>
-                    
+                
                     
             ) : (
                 <img 
@@ -115,7 +77,7 @@ export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps
 
             )}
 
-            {isHovered && isVideoLoading && <Spinner />}
+            {isHovered && isVideoLoading && <Spinner/>}
 
              
         </section>
