@@ -89,40 +89,38 @@ export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps
         <section className="flex flex-col justify-center items-center">
 
             <section className="relative w-full h-full aspect-[3/4] rounded-lg overflow-hidden shadow-lg cursor-pointer group" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-            <section className="">
-                    {isHovered && firstOpeningVideo ? (
-                    <video
-                        key={anime.id}
-                        className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300"
-                        style={{ opacity: isHovered && firstOpeningVideo ? 1 : 0 }}
-                        src={firstOpeningVideo}
-                        autoPlay
-                        muted={!canPlayAudio}
-                        loop
-                        playsInline
-                        preload="metadata" 
-                    >
-                    </video>
-                    
-                    
-                ) : (
-                    <img 
-                        className="absolute inset-0 w-full h-full object-cover" 
-                        src={coverImage || '/placeholder.png'}
-                        alt={`capa de ${anime.name}`}
-                    >
-                    </img>
-
-                )}
-
-                {isHovered && isVideoLoading && <Spinner />}
-
-            </section>
-
-                
-            </section>
             
-            <section>{anime.name}</section>
+                {isHovered && firstOpeningVideo ? (
+                <video
+                    key={anime.id}
+                    className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300"
+                    style={{ opacity: isHovered && firstOpeningVideo ? 1 : 0 }}
+                    src={firstOpeningVideo}
+                    autoPlay
+                    muted={!canPlayAudio}
+                    loop
+                    playsInline
+                    preload="metadata" 
+                >
+                </video>
+                    
+                    
+            ) : (
+                <img 
+                    className="absolute inset-0 w-full h-full object-cover" 
+                    src={coverImage || '/placeholder.png'}
+                    alt={`capa de ${anime.name}`}
+                >
+                </img>
+
+            )}
+
+            {isHovered && isVideoLoading && <Spinner />}
+
+             
+        </section>
+            
+        <section>{anime.name}</section>
 
         </section>
         
