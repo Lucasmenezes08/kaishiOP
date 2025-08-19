@@ -1,7 +1,7 @@
 import { useQueries } from "@tanstack/react-query";
 import { useState } from "react";
 import getAnimeYear from "../../../../services/getAnimeYear";
-import { Carousel , CarouselContent , CarouselItem , CarouselNext , CarouselPrevious} from "@/components/ui/carousel";
+import { Carousel , CarouselContent , CarouselItem } from "@/components/ui/carousel";
 import AnimeCardComponent from "../../animeCard/AnimeCardComponent";
 
 
