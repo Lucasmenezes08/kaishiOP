@@ -5,7 +5,8 @@ export function createUrlGenre (genre:string){
     const param = new URLSearchParams({
         'filter[year]' : String(genre),
         'page[size]' : '50',
-        'sort' : '-id',
+        'sort' : 'random',
+        'media_format' : 'TV',
         'include': 'images,animethemes.animethemeentries.videos',
     })
 

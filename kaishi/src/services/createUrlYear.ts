@@ -5,7 +5,8 @@ export function createUrlByYear (year:number):string{
     const param = new URLSearchParams({
         'filter[year]' : String(year),
         'page[size]' : '50',
-        'sort' : '-id',
+        'sort' : 'random',
+        'media_format' : 'TV',
         'include': 'images,animethemes.animethemeentries.videos',
         
     })
