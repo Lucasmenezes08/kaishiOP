@@ -1,8 +1,9 @@
 import { useQueries } from "@tanstack/react-query";
 import { useState } from "react";
 import getAnimeYear from "../../../../services/getAnimeYear";
-import { Carousel , CarouselContent , CarouselItem } from "@/components/ui/carousel";
+import { Carousel , CarouselContent , CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import AnimeCardComponent from "../../animeCard/AnimeCardComponent";
+import { CarouselSkeleton } from "../../animation/animation-skeleton";
 
 
 
@@ -27,18 +28,20 @@ export default function CarrouselYear (){
 
 
     return (
-        <section className="w-full h-[10rem]" onClick={() => setAudioPermission(true)}>
+        <section className="min-h-screen md:p-15 p-4 " onClick={() => setAudioPermission(true)}>
             <h1>Animes por ano</h1>
+            <section className="space-y-12">
 
+            
             {result.map ((anime , index) => {
                 const yearToShow = years[index];
 
                 if (anime.isLoading){
-                    return <p>Carregando</p>
+                    return <CarouselSkeleton/>
                 }
 
                 if (anime.error){
-                    return <p>Erro ao buscar dados</p>
+                    return null;
                 }
 
                 const animeData = anime.data?.anime;
@@ -47,20 +50,22 @@ export default function CarrouselYear (){
                     <section className="w-full flex items-center flex-col" key={yearToShow}>
                         <p>{`Aberturas de ${yearToShow}`}</p>
                         <Carousel className="w-full" opts={{loop: true , align : "start"}}>
-                            <CarouselContent className="px-5 py-10">
+                            <CarouselContent className="-ml-4">
                                 {animeData?.map(value => (
-                                    <CarouselItem className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5" key={value.id}>
-                                        <section className="h-full">
-                                            <AnimeCardComponent anime={value} canPlayAudio={audioPermission} />
-                                        </section>
+                                    <CarouselItem className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/5 xl:basis-1/6" key={value.id}>
+                                        
+                                        <AnimeCardComponent anime={value} canPlayAudio={audioPermission} />
+                                        
                                     </CarouselItem>
                                 ))}
                             </CarouselContent>
-                            
+                            <CarouselPrevious  className="hidden md:flex bg-transparent border-none text-xl"/>
+                            <CarouselNext  className="hidden md:flex bg-transparent border-none text-xl"/>
                         </Carousel>
                     </section>
                 )
             })}
+            </section>
         </section>
         )
 
