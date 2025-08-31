@@ -52,7 +52,7 @@ export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps
                 {isHovered && firstOpeningVideo ? (
                
                 <video
-                ref={videoRef}
+                    ref={videoRef}
                     key={anime.id}
                     className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300"
                     style={{ opacity: isHovered && firstOpeningVideo ? 0.75 : 0 }}
