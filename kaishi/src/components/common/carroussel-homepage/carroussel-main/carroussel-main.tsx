@@ -36,7 +36,7 @@ export default function CarrouselYear (){
 
     return (
         <Carousel className="w-full" opts={{loop: true , align : "start"}} onClick={() => setAudioPermission(true)}>
-            <CarouselContent className="-ml-4">
+            <CarouselContent className="-ml-20">
                 {animeData?.map((value) => (
                     <CarouselItem className="pl-7" key={value.id}>
                                                 
@@ -47,8 +47,6 @@ export default function CarrouselYear (){
             </CarouselContent>
                                 
         </Carousel>
-        )
-                
-    
+        )  
 }
 

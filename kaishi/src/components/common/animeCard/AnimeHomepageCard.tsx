@@ -38,16 +38,16 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
     
     const handleTimeUpdate = () => {
         const videoElement = videoRef.current;
-        if (videoElement && videoElement.currentTime >= 20) {
+        if (videoElement && videoElement.currentTime >= 60) {
             videoElement.currentTime = 0;
         }
     };
 
 
     return (
-        <section className="flex flex-col justify-center items-center">
+        <section className="flex justify-center items-center">
 
-            <section className="relative w-full h-full aspect-[3/4] rounded-lg overflow-hidden shadow-lg cursor-pointer group" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+            <section className="relative w-full h-full aspect-video overflow-hidden shadow-lg cursor-pointer" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             
                 {isHovered && firstOpeningVideo ? (
                
@@ -69,9 +69,8 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
                     
             ) : (
                 <img 
-                    className="absolute inset-0 w-full h-full object-cover" 
+                    className="absolute inset-0 w-full h-full" 
                     src={coverImage || '/placeholder.png'}
-                    alt={`capa de ${anime.name}`}
                 >
                 </img>
 
@@ -79,8 +78,9 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
 
             {isHovered && isVideoLoading && <Spinner/>}
 
-            <section>
+            <section className="absolute inset-0 top-[50%] left-[5%] font-bold text-5xl">
                 <h3>{anime.name}</h3>
+
             </section>
 
         </section>

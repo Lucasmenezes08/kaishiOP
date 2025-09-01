@@ -3,7 +3,6 @@ export const animeCustomData = [
     'Code Geass: Hangyaku no Lelouch',
     "My Hero Academia",
     "Noragami",
-    "Hunter x Hunter",
     "Tokyo Ghoul",
     "Death Note",
     "Fullmetal Alchemist: Brotherhood",
