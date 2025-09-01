@@ -3,7 +3,7 @@ export default function createUrlCustomAnime(animeName : string){
 
     const param = new URLSearchParams({
         'filter[name]' : String(animeName),
-        'page[size]' : '12',
+        'page[size]' : '10',
         'type' : 'OP',
         'sort' : 'random',
         'media_format' : 'TV',
