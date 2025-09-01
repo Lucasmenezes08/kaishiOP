@@ -2,6 +2,7 @@ import type { AnimeCard} from "../../../types/type-services/animeThemeTypes";
 import { useEffect, useRef, useState } from "react";
 import { Opacity } from "../animation/animation-opacity";
 
+
 interface AnimeCardProps {
     anime : AnimeCard;
     canPlayAudio: boolean
@@ -15,7 +16,7 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
     
 
 
-    const coverImage = anime.images.find(img => img.facet === 'Cover Large' || 'Cover Small')?.link;
+    //const coverImage = anime.images.find(img => img.facet === 'Cover Large' || 'Cover Small')?.link;
 
     const firstOpeningVideo = anime.animethemes
     ?.find(theme => theme.slug === 'OP1')
@@ -38,7 +39,7 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
     
     const handleTimeUpdate = () => {
         const videoElement = videoRef.current;
-        if (videoElement && videoElement.currentTime >= 60) {
+        if (videoElement && videoElement.currentTime >= 90) {
             videoElement.currentTime = 0;
         }
     };
@@ -68,17 +69,13 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
                 
                     
             ) : (
-                <img 
-                    className="absolute inset-0 w-full h-full" 
-                    src={coverImage || '/placeholder.png'}
-                >
-                </img>
+                <Opacity/>
 
             )}
 
             {isHovered && isVideoLoading && <Opacity/>}
 
-            <section className="absolute inset-0 top-[50%] left-[5%] font-bold text-5xl">
+            <section className="absolute inset-0 top-[50%] left-[7%] font-bold text-5xl">
                 <h3>{anime.name}</h3>
 
             </section>
