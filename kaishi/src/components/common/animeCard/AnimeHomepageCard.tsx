@@ -1,6 +1,6 @@
 import type { AnimeCard} from "../../../types/type-services/animeThemeTypes";
 import { useEffect, useRef, useState } from "react";
-import { Spinner } from "../animation/animation-spinner";
+import { Opacity } from "../animation/animation-opacity";
 
 interface AnimeCardProps {
     anime : AnimeCard;
@@ -76,7 +76,7 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
 
             )}
 
-            {isHovered && isVideoLoading && <Spinner/>}
+            {isHovered && isVideoLoading && <Opacity/>}
 
             <section className="absolute inset-0 top-[50%] left-[5%] font-bold text-5xl">
                 <h3>{anime.name}</h3>
