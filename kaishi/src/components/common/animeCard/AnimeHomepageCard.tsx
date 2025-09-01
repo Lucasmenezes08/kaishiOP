@@ -1,6 +1,7 @@
 import type { AnimeCard} from "../../../types/type-services/animeThemeTypes";
 import { useEffect, useRef, useState } from "react";
-import { Spinner } from "../animation/animation-spinner";
+import { Opacity } from "../animation/animation-opacity";
+
 
 interface AnimeCardProps {
     anime : AnimeCard;
@@ -8,14 +9,14 @@ interface AnimeCardProps {
 }
 
 
-export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps):any{
+export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps):any{
     const [isHovered, setIsHovered] = useState(false);
     const [isVideoLoading , setIsVideoLoading] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
     
 
 
-    const coverImage = anime.images.find(img => img.facet === 'Cover Large' || 'Cover Small')?.link;
+    //const coverImage = anime.images.find(img => img.facet === 'Cover Large' || 'Cover Small')?.link;
 
     const firstOpeningVideo = anime.animethemes
     ?.find(theme => theme.slug === 'OP1')
@@ -38,16 +39,16 @@ export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps
     
     const handleTimeUpdate = () => {
         const videoElement = videoRef.current;
-        if (videoElement && videoElement.currentTime >= 20) {
+        if (videoElement && videoElement.currentTime >= 90) {
             videoElement.currentTime = 0;
         }
     };
 
 
     return (
-        <section className="flex flex-col justify-center items-center">
+        <section className="flex justify-center items-center">
 
-            <section className="relative w-full h-full aspect-[3/4] rounded-lg overflow-hidden shadow-lg cursor-pointer group" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+            <section className="relative w-full h-full aspect-video overflow-hidden shadow-lg cursor-pointer" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             
                 {isHovered && firstOpeningVideo ? (
                
@@ -68,21 +69,20 @@ export default function AnimeCardComponent ({anime ,canPlayAudio}:AnimeCardProps
                 
                     
             ) : (
-                <img 
-                    className="absolute inset-0 w-full h-full object-cover" 
-                    src={coverImage || '/placeholder.png'}
-                    alt={`capa de ${anime.name}`}
-                >
-                </img>
+                <Opacity/>
 
             )}
 
-            {isHovered && isVideoLoading && <Spinner/>}
+            {isHovered && isVideoLoading && <Opacity/>}
 
-             
+            <section className="absolute inset-0 top-[50%] left-[7%] font-bold text-5xl">
+                <h3>{anime.name}</h3>
+
+            </section>
+
         </section>
             
-        <section>{anime.name}</section>
+       
 
         </section>
         

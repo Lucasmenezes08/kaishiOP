@@ -6,6 +6,7 @@ export function createUrlByYear (year:number):string{
         'filter[year]' : String(year),
         'page[size]' : '20',
         'sort' : 'random',
+        'type' : 'OP',
         'media_format' : 'TV',
         'include': 'images,animethemes.animethemeentries.videos',
         
