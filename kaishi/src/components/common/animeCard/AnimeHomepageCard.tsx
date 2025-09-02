@@ -5,7 +5,7 @@ import { Opacity } from "../animation/animation-opacity";
 
 interface AnimeCardProps {
     anime : AnimeCard;
-    canPlayAudio: boolean
+    canPlayAudio: boolean;
 }
 
 
@@ -25,7 +25,7 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
 
     useEffect(() => {
         const videoElement = videoRef.current;
-        if (!videoElement) return;
+        if (!videoElement) return;    
 
         if (isHovered && firstOpeningVideo) {
         
@@ -39,11 +39,13 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
     
     const handleTimeUpdate = () => {
         const videoElement = videoRef.current;
-        if (videoElement && videoElement.currentTime >= 90) {
+        if (videoElement && videoElement.currentTime >= 30) {
             videoElement.currentTime = 0;
         }
+        console.log (videoElement?.currentTime);
     };
 
+    
 
     return (
         <section className="flex justify-center items-center">

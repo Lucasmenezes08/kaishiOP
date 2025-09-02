@@ -4,6 +4,8 @@ export const animeCustomData = [
     'shigatsu wa kimi no uso',
     'Code Geass: Hangyaku no Lelouch',
     "Gotoubun no Hanayome∽",
+    "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
+    "Dandadan",
     "My Hero Academia",
     "Noragami",
     "Tokyo Ghoul",
