@@ -22,7 +22,8 @@ export interface AnimeCard {
     id: number;
     name: string;
     images: AnimeImage[];
-    animethemes: AnimeTheme[]
+    animethemes: AnimeTheme[];
+    synopsis : string;
 }
 
 export interface AnimeData {
