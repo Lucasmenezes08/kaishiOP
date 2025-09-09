@@ -16,29 +16,26 @@ export default function CarrouselYear (){
 
     const [audioPermission , setAudioPermission] = useState(false);
     const [api , setApi] = useState<CarouselApi>();
+    const [currentSlide, setCurrentSlide] = useState(0);
 
     useEffect (()=> {
-
-        const interval = setInterval(() => {
-            if (api?.canScrollNext()){
-                api.scrollNext();
-                console.log ("OP passada");
+            if (!api) {
+                return;
             }
 
-            else {
-                api?.scrollTo(0);
-                console.log ("OP reiniciada");
-            }
-        } , 30 * 1000);
+            setCurrentSlide(api.selectedScrollSnap());
 
-        return () => clearInterval(interval);
-        
+            const onSelect = () => {
+                setCurrentSlide(api.selectedScrollSnap());
+            };
+
+            api.on("select", onSelect);    
 
     }, [api]);
 
     const plugin = useRef(
-    Autoplay({ delay:36 * 1000 , stopOnInteraction: true }) 
-  );
+        Autoplay({ delay: 30 * 1000 , stopOnInteraction: true }) 
+    );
 
     const result = useQueries({
         queries: customNames.map(name => {
@@ -61,13 +58,12 @@ export default function CarrouselYear (){
 
 
     return (
-        <Carousel plugins={[plugin.current]} setApi={setApi} className="w-full" opts={{loop: true , align : "start"}} onClick={() => setAudioPermission(true)} onMouseEnter={plugin.current.stop}
-      onMouseLeave={plugin.current.reset}>
+        <Carousel plugins={[plugin.current]} setApi={setApi} className="w-full" opts={{loop: true , align : "start"}} onClick={() => setAudioPermission(true)}>
             <CarouselContent className="-ml-20">
-                {animeData?.map((value) => (
+                {animeData?.map((value, index) => (
                     <CarouselItem className="pl-7" key={value.id}>
                                                 
-                        <AnimeHomepageCard anime={value} canPlayAudio={audioPermission}/>
+                        <AnimeHomepageCard anime={value} canPlayAudio={audioPermission} isActive={index === currentSlide}/>
                                                 
                     </CarouselItem>
                     ))}

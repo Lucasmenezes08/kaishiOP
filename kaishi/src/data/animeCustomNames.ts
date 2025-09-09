@@ -22,4 +22,5 @@ export const animeCustomData = [
     "Ousama ranking",
     "boku no hero academia",
     "kimetsu no yaiba",
+    "Dragon ball kai",
 ]
