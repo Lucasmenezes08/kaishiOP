@@ -80,7 +80,7 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
 
             <section className="absolute inset-0 top-[40%] left-[7%]">
                 <h3 className="overflow-wrap w-[70%] font-bold text-5xl mb-10">{anime.name}</h3>
-                <p className="text-gray-300 overflow-wrap w-[60%] text-left text-md font-medium transition-opacity ease-in-out delay-500">{anime.synopsis}</p>   
+                <p className={`${isVideoLoading ? "text-gray-300 overflow-wrap w-[60%] text-left text-md font-medium transition ease-in-out delay-1000" : " transition-opacity opacity-1 ease-in-out delay-500"}`}>{anime.synopsis}</p>   
             </section>
 
         </section>
