@@ -52,7 +52,7 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio , isActive}:Anim
     return (
         <section className="flex justify-center items-center">
 
-            <section className="relative w-full h-full aspect-video overflow-hidden shadow-lg cursor-pointer" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+            <section className="relative w-full h-full aspect-video overflow-hidden shadow-lg cursor-pointer">
             
                 {isActive && firstOpeningVideo ? (
                

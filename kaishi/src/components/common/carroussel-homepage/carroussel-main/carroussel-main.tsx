@@ -34,7 +34,7 @@ export default function CarrouselYear (){
     }, [api]);
 
     const plugin = useRef(
-        Autoplay({ delay: 30 * 1000 , stopOnInteraction: true }) 
+        Autoplay({ delay: 30 * 1000 , stopOnInteraction: false }) 
     );
 
     const result = useQueries({
