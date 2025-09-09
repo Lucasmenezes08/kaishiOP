@@ -83,7 +83,7 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
                 <h3 className="overflow-wrap w-[70%] font-bold text-5xl mb-10">{anime.name}</h3>
                 <p className={`${isVideoLoading ? "text-gray-300 overflow-wrap w-[60%] text-left text-md font-medium transition ease-in-out delay-1000" : " transition-opacity opacity-1 ease-in-out delay-500"}`}>{anime.synopsis}</p> 
 
-                <section className="fixed flex flex-row mt-10 gap-6">
+                <section className="fixed flex flex-row mt-7 gap-6">
                     <ButtonCarroussel text={"Mais informações"} style={"text-lg font-semibold flex items-center justify-center w-45 h-15 bg-slate-200 solid border-gray-100 text-black rounded-2xl cursor-pointer hover:bg-slate-300 hover:border-gray-200"}/>
                     <ButtonCarroussel text={"Avaliar"} style={"text-lg font-semibold flex items-center justify-center w-45 h-15 bg-red-500 solid border-gray-100 text-white rounded-2xl cursor-pointer hover:bg-red-600 hover:border-gray-200"} />
                 </section>  
