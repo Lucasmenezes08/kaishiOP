@@ -16,26 +16,29 @@ export default function CarrouselYear (){
 
     const [audioPermission , setAudioPermission] = useState(false);
     const [api , setApi] = useState<CarouselApi>();
-    const [currentSlide, setCurrentSlide] = useState(0);
 
     useEffect (()=> {
-            if (!api) {
-                return;
+
+        const interval = setInterval(() => {
+            if (api?.canScrollNext()){
+                api.scrollNext();
+                console.log ("OP passada");
             }
 
-            setCurrentSlide(api.selectedScrollSnap());
+            else {
+                api?.scrollTo(0);
+                console.log ("OP reiniciada");
+            }
+        } , 30 * 1000);
 
-            const onSelect = () => {
-                setCurrentSlide(api.selectedScrollSnap());
-            };
-
-            api.on("select", onSelect);    
+        return () => clearInterval(interval);
+        
 
     }, [api]);
 
     const plugin = useRef(
-        Autoplay({ delay: 30 * 1000 , stopOnInteraction: false }) 
-    );
+    Autoplay({ delay:36 * 1000 , stopOnInteraction: true }) 
+  );
 
     const result = useQueries({
         queries: customNames.map(name => {
@@ -58,12 +61,13 @@ export default function CarrouselYear (){
 
 
     return (
-        <Carousel plugins={[plugin.current]} setApi={setApi} className="w-full" opts={{loop: true , align : "start"}} onClick={() => setAudioPermission(true)}>
+        <Carousel plugins={[plugin.current]} setApi={setApi} className="w-full" opts={{loop: true , align : "start"}} onClick={() => setAudioPermission(true)} onMouseEnter={plugin.current.stop}
+      onMouseLeave={plugin.current.reset}>
             <CarouselContent className="-ml-20">
-                {animeData?.map((value, index) => (
+                {animeData?.map((value) => (
                     <CarouselItem className="pl-7" key={value.id}>
                                                 
-                        <AnimeHomepageCard anime={value} canPlayAudio={audioPermission} isActive={index === currentSlide}/>
+                        <AnimeHomepageCard anime={value} canPlayAudio={audioPermission}/>
                                                 
                     </CarouselItem>
                     ))}
@@ -72,4 +76,3 @@ export default function CarrouselYear (){
         </Carousel>
         )  
 }
-
