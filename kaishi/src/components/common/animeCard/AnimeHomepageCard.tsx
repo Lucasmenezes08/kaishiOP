@@ -30,7 +30,6 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
         if (!videoElement) return;    
 
         if (isHovered && firstOpeningVideo) {
-        
             videoElement.play().catch(err => console.error("Autoplay bloqueado", err));
         } else {
             videoElement.pause();
@@ -41,10 +40,9 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
     
     const handleTimeUpdate = () => {
         const videoElement = videoRef.current;
-        if (videoElement && videoElement.currentTime >= 30) {
+        if (videoElement && videoElement.currentTime >= 60) {
             videoElement.currentTime = 0;
         }
-        console.log (videoElement?.currentTime);
     };
 
     
@@ -81,7 +79,7 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
 
             <section className="absolute inset-0 top-[25%] left-[7%]">
                 <h3 className="overflow-wrap w-[70%] font-bold text-5xl mb-10">{anime.name}</h3>
-                <p className={`${isVideoLoading ? "text-gray-300 overflow-wrap w-[60%] text-left text-md font-medium transition ease-in-out delay-1000" : " transition-opacity opacity-1 ease-in-out delay-500"}`}>{anime.synopsis}</p> 
+                <p className={`${isVideoLoading ? "text-gray-300 overflow-wrap w-[60%] break-after-auto text-left text-md font-medium transition ease-in-out delay-1000" : " overflow-wrap w-[60%] break-after-auto transition-opacity opacity-0 ease-in-out delay-500"}`}>{anime.synopsis}</p> 
 
                 <section className="fixed flex flex-row mt-7 gap-6">
                     <ButtonCarroussel text={"Mais informações"} style={"text-lg font-semibold flex items-center justify-center w-45 h-15 bg-slate-200 solid border-gray-100 text-black rounded-2xl cursor-pointer hover:bg-slate-300 hover:border-gray-200"}/>
