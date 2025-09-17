@@ -4,7 +4,11 @@ export const animeCustomData = [
     'shigatsu wa kimi no uso',
     'Code Geass: Hangyaku no Lelouch',
     "Gotoubun no Hanayome∽",
-    "My Hero Academia",
+    "Seishun Buta Yarou wa Bunny Girl Senpai no Yume wo Minai",
+    'Kimetsu no Yaiba: Yuukaku-hen',
+    'Nanatsu no Taizai',
+    'Kusuriya no Hitorigoto',
+    "Dandadan",
     "Noragami",
     "Tokyo Ghoul",
     "Death Note",
@@ -20,4 +24,5 @@ export const animeCustomData = [
     "Ousama ranking",
     "boku no hero academia",
     "kimetsu no yaiba",
+    "Dragon ball kai",
 ]

@@ -1,11 +1,13 @@
 import type { AnimeCard} from "../../../types/type-services/animeThemeTypes";
 import { useEffect, useRef, useState } from "react";
 import { Opacity } from "../animation/animation-opacity";
+import ButtonCarroussel from "../utility/buttonCarroussel";
+
 
 
 interface AnimeCardProps {
     anime : AnimeCard;
-    canPlayAudio: boolean
+    canPlayAudio: boolean;
 }
 
 
@@ -25,10 +27,9 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
 
     useEffect(() => {
         const videoElement = videoRef.current;
-        if (!videoElement) return;
+        if (!videoElement) return;    
 
         if (isHovered && firstOpeningVideo) {
-        
             videoElement.play().catch(err => console.error("Autoplay bloqueado", err));
         } else {
             videoElement.pause();
@@ -39,11 +40,12 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
     
     const handleTimeUpdate = () => {
         const videoElement = videoRef.current;
-        if (videoElement && videoElement.currentTime >= 90) {
+        if (videoElement && videoElement.currentTime >= 60) {
             videoElement.currentTime = 0;
         }
     };
 
+    
 
     return (
         <section className="flex justify-center items-center">
@@ -75,11 +77,17 @@ export default function AnimeHomepageCard ({anime ,canPlayAudio}:AnimeCardProps)
 
             {isHovered && isVideoLoading && <Opacity/>}
 
-            <section className="absolute inset-0 top-[50%] left-[7%] font-bold text-5xl">
-                <h3>{anime.name}</h3>
+            <section className="absolute inset-0 top-[25%] left-[7%]">
+                <h3 className="overflow-wrap w-[70%] font-bold text-5xl mb-10">{anime.name}</h3>
+                <p className={`${isVideoLoading ? "text-gray-300 overflow-wrap w-[60%] break-after-auto text-left text-md font-medium transition ease-in-out delay-1000" : " overflow-wrap w-[60%] break-after-auto transition-opacity opacity-0 ease-in-out delay-500"}`}>{anime.synopsis}</p> 
 
+                <section className="fixed flex flex-row mt-7 gap-6">
+                    <ButtonCarroussel text={"Mais informações"} style={"text-lg font-semibold flex items-center justify-center w-45 h-15 bg-slate-200 solid border-gray-100 text-black rounded-2xl cursor-pointer hover:bg-slate-300 hover:border-gray-200"}/>
+                    <ButtonCarroussel text={"Avaliar"} style={"text-lg font-semibold flex items-center justify-center w-45 h-15 bg-red-500 solid border-gray-100 text-white rounded-2xl cursor-pointer hover:bg-red-600 hover:border-gray-200"} />
+                </section>  
             </section>
-
+            
+            
         </section>
             
        

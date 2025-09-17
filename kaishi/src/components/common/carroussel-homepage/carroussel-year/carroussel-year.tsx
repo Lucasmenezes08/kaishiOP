@@ -52,7 +52,7 @@ export default function CarrouselYear (){
                         <Carousel className="w-full" opts={{loop: true , align : "start"}}>
                             <CarouselContent className="-ml-4">
                                 {animeData?.map(value => (
-                                    <CarouselItem className="pl-7 basis-1/2 md:basis-1/3 lg:basis-1/5 xl:basis-1/7" key={value.id}>
+                                    <CarouselItem className="pl-7 basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5" key={value.id}>
                                         
                                         <AnimeCardComponent anime={value} canPlayAudio={audioPermission} />
                                         
